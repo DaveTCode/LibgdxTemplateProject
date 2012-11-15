@@ -19,4 +19,14 @@ abstract class StateQuerier {
    * Returns a list of all events which occurred after a given time t.
    */
   def eventsPostTickVal(t: Long) = Buffer filter {_.ticks > t}
+  
+  /**
+   * Returns a list of all events which occurred before a given time t and that
+   * match one of a list of possible message types.
+   */
+  def messageEvents(t: Long, messageTypes: List[Manifest[Message]]) = {
+    eventsPreTickVal(t).filter((message: Message) => {
+      messageTypes.contains(Manifest.classType(message.getClass))
+    })
+  }
 }
