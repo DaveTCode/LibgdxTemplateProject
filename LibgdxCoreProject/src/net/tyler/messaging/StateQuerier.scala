@@ -22,11 +22,9 @@ abstract class StateQuerier {
   
   /**
    * Returns a list of all events which occurred before a given time t and that
-   * match one of a list of possible message types.
+   * match a particular message type.
    */
-  def messageEvents(t: Long, messageTypes: List[Manifest[Message]]) = {
-    eventsPreTickVal(t).filter((message: Message) => {
-      messageTypes.contains(Manifest.classType(message.getClass))
-    })
+  def messageEvents[T <: Message](t: Long) = {
+    eventsPreTickVal(t) collect { case message: T => message }
   }
 }
