@@ -7,7 +7,7 @@ package net.tyler.math
  * @param x - Floating point coordinates
  * @param y - Floating point coordinates
  */
-class ImmutableVector2f(val x: Float, val y: Float) {
+case class ImmutableVector2f(val x: Float, val y: Float) {
   def +(v: ImmutableVector2f): ImmutableVector2f = new ImmutableVector2f(x + v.x, y + v.y)
 
   def -(v: ImmutableVector2f): ImmutableVector2f = new ImmutableVector2f(x - v.x, y - v.y)
